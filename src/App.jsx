@@ -1,8 +1,14 @@
+import TodosContextProvider from './contexts/TodoContext'
+
+import TodoList from './components/TodoList'
+import TodoForm from './components/TodoForm'
+
 function App() {
   return (
-    <div>
-      <h1>Todo List</h1>
-    </div>
+    <TodosContextProvider>
+      <TodoList />
+      <TodoForm />
+    </TodosContextProvider>
   )
 }
 
