@@ -19,9 +19,9 @@ function TodoForm() {
     }
   }
 
-  const handleKeyUp = (e) => {
-    if (e.keyCode === 13) {
-      handleAddTodo()
+  const handleKeyUp = (event) => {
+    if (event.keyCode === 13) {
+      handleAddTodo(event)
     }
   }
 
@@ -33,7 +33,12 @@ function TodoForm() {
         onChange={(e) => setTask(e.target.value)}
         onKeyUp={handleKeyUp}
       />
-      <Button size='sm' type='submit' disabled={isDisabled}>
+      <Button
+        className={Styles.btn}
+        size='sm'
+        type='submit'
+        disabled={isDisabled}
+      >
         Add task
       </Button>
     </form>
