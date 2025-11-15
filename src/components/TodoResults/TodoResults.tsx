@@ -1,12 +1,12 @@
 import { useTodos } from '../../hooks/useTodos'
-
 import Styles from './TodoResults.module.scss'
+import { TodoItem } from '../../contexts/TodosContextProvider'
 
 function TodoResults() {
   const { todos } = useTodos()
 
-  const calculateChecked = () => {
-    return todos.filter((t) => t.checked).length
+  const calculateChecked = (): number => {
+    return (todos as TodoItem[]).filter((t) => t.checked).length
   }
 
   return (
@@ -17,3 +17,5 @@ function TodoResults() {
 }
 
 export default TodoResults
+
+

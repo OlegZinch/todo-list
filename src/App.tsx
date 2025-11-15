@@ -1,5 +1,4 @@
 import TodosContextProvider from './contexts/TodosContextProvider'
-
 import TodoList from './components/TodoList'
 import TodoResults from './components/TodoResults'
 import TodoForm from './components/TodoForm'

@@ -1,36 +1,45 @@
 import { Button, TextInput } from '@carbon/react'
 import { useState } from 'react'
 import { useTodos } from '../../hooks/useTodos'
+import { TodoItem } from '../../contexts/TodosContextProvider'
 
 import Styles from './TodoForm.module.scss'
 
 function TodoForm() {
-  const [task, setTask] = useState('')
+  const [task, setTask] = useState<string>('')
   const { addTodo } = useTodos()
   const isDisabled = task.trim().length === 0
 
-  const handleAddTodo = (event) => {
+  const handleAddTodo = (event: React.FormEvent) => {
     event.preventDefault()
-
     if (!isDisabled) {
-      const newTodo = { id: Math.random(), label: task, checked: false }
+      const newTodo: TodoItem = {
+        id: Math.random(),
+        label: task,
+        checked: false,
+      }
       addTodo(newTodo)
       setTask('')
     }
   }
 
-  const handleKeyUp = (event) => {
+  const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
-      handleAddTodo(event)
+      handleAddTodo(event as unknown as React.FormEvent)
     }
   }
 
   return (
     <form className={Styles.form} onSubmit={handleAddTodo}>
       <TextInput
+        id='new-task'
+        labelText='Add new task'
+        hideLabel={true}
         placeholder='Enter new task'
         value={task}
-        onChange={(e) => setTask(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setTask(e.target.value)
+        }
         onKeyUp={handleKeyUp}
       />
       <Button

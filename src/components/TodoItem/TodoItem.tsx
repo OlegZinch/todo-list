@@ -1,9 +1,16 @@
 import { IconButton, Checkbox } from '@carbon/react'
 import { TrashCan } from '@carbon/react/icons'
-
 import Styles from './TodoItem.module.scss'
 
-function TodoItem({ onClick, checked, onDelete, label, onKeyUp }) {
+interface TodoItemProps {
+  onClick: () => void
+  checked: boolean
+  onDelete: () => void
+  label: string
+  onKeyUp: (e: React.KeyboardEvent<HTMLInputElement>) => void
+}
+
+function TodoItem({ onClick, checked, onDelete, label, onKeyUp }: TodoItemProps) {
   return (
     <div className={Styles.item}>
       <Checkbox
@@ -21,3 +28,5 @@ function TodoItem({ onClick, checked, onDelete, label, onKeyUp }) {
 }
 
 export default TodoItem
+
+

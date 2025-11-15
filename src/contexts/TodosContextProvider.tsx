@@ -1,7 +1,13 @@
-import { useState } from 'react'
+import { useState, ReactNode } from 'react'
 import { TodosContext } from './TodoContext'
 
-const todosTemplate = [
+export interface TodoItem {
+  id: number
+  label: string
+  checked: boolean
+}
+
+const todosTemplate: TodoItem[] = [
   {
     id: 0,
     label: 'Fix an ability to display all tasks',
@@ -34,14 +40,18 @@ const todosTemplate = [
   },
 ]
 
-function TodosContextProvider({ children }) {
-  const [todos, setTodos] = useState(() => todosTemplate)
+interface TodosContextProviderProps {
+  children: ReactNode
+}
 
-  function addTodo(todo) {
+function TodosContextProvider({ children }: TodosContextProviderProps) {
+  const [todos, setTodos] = useState<TodoItem[]>(() => todosTemplate)
+
+  function addTodo(todo: TodoItem) {
     setTodos((prev) => [...prev, todo])
   }
 
-  function toggleTodo(id) {
+  function toggleTodo(id: number) {
     const index = todos.findIndex((t) => t.id === id)
     const newItem = { ...todos[index], checked: !todos[index].checked }
     const newTodos = [
@@ -52,7 +62,7 @@ function TodosContextProvider({ children }) {
     setTodos(newTodos)
   }
 
-  function deleteTodo(id) {
+  function deleteTodo(id: number) {
     const newTodos = todos.filter((t) => t.id !== id)
     setTodos(newTodos)
   }
